@@ -1,0 +1,37 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Web application for todo list",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JyothiGandi/To-do-List.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Express.js",
+    "AngularJS",
+    "Node.js"
+  ],
+  "author": "Jyothi Gandi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JyothiGandi/To-do-List/issues"
+  },
+  "homepage": "https://github.com/JyothiGandi/To-do-List#readme",
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-ui-bootstrap": "^2.3.0",
+    "angular-ui-router": "^0.3.2",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "helmet": "^3.1.0",
+    "mongodb": "^2.2.12"
+  }
+}
