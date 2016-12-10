@@ -4,12 +4,12 @@
 
 'use strict';
 
-//let express = require('express');
+let express = require('express');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let cors = require('cors');
 let helmet = require('helmet');
-//const path = require('path');
+const path = require('path');
 
 module.exports = (app) => {
     app.use(helmet());
@@ -19,5 +19,7 @@ module.exports = (app) => {
     }));
     app.use(cors());
     app.use(cookieParser());
+
+    app.use(express.static(path.join(__dirname, '../../client')));
     //app.use('/static', express.static(path.join(__dirname, 'public')));
 };
