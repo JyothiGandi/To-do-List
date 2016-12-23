@@ -19,6 +19,10 @@ module.exports = {
           _db = db;
           console.log(`Connected to Mongo`);
       });
+  },
+
+  todo() {
+      return _db.collection('todo');
   }
 
 };

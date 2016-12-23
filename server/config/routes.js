@@ -4,15 +4,14 @@
 
 'use strict';
 
+let todoController = require('../controller/todoController');
+
 module.exports = (app) => {
 
     /**
      * Routes
      */
 
-    app.get('/todo', (req, res, next) => {
-        //res.send('<html><h3>TO-DO List</h3></html>');
-        return res.json({todo: 'buy coffee'});
-    });
+    app.get('/todo', todoController.getTodo);
 
 };

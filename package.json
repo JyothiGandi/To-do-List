@@ -5,6 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
+    "watch": "gulp watch --gulpfile client/gulpfile.babel.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

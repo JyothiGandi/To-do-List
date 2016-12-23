@@ -5,7 +5,7 @@
 'use strict';
 
 var todoControllerModule = angular.module('todoControllerModule', [])
-    .controller('TodoController', function ($scope){
+    .controller('TodoController', function ($scope, $http){
         console.log("Todo controller");
         $scope.todoList = [{
             name: 'first todo'
