@@ -4,14 +4,26 @@
 
 'use strict';
 
-var todoControllerModule = angular.module('todoControllerModule', [])
-    .controller('TodoController', function ($scope, $http){
-        console.log("Todo controller");
-        $scope.todoList = [{
-            name: 'first todo'
-        },{
-            name: 'second todo'
-        }];
+import { TodoClass } from '../services/todoService';
+
+let todoControllerModule = angular.module('todoControllerModule', [])
+    .controller('TodoController', function ($scope){
+
+        $scope.todoList = [];
+
+        let init = function () {
+            let todoClass = new TodoClass();
+            todoClass.getTodoList()
+                .then(todo => {
+                    $scope.todoList = todo
+                })
+                .catch(err => {
+                    console.log("ERR", err);
+                });
+        };
+
+        init();
+
     });
 
 export default todoControllerModule;

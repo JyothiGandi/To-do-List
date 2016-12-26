@@ -19,6 +19,9 @@ require('./config/express')(app);
 // API routing
 require('./config/routes')(app);
 
+// Error handler
+require('./config/errorHandler')(app);
+
 let port = config.port;
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

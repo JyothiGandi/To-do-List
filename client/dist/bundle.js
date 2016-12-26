@@ -28,7 +28,7 @@ _angular2.default.module('todo', ["ui.router", "todoControllerModule"]).config(f
     });
 });
 
-},{"./controllers/todoController":2,"angular":5,"angular-ui-router":3}],2:[function(require,module,exports){
+},{"./controllers/todoController":2,"angular":6,"angular-ui-router":4}],2:[function(require,module,exports){
 /**
  * Created by Jyothi on 10/12/16.
  */
@@ -38,18 +38,84 @@ _angular2.default.module('todo', ["ui.router", "todoControllerModule"]).config(f
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _todoService = require('../services/todoService');
+
 var todoControllerModule = angular.module('todoControllerModule', []).controller('TodoController', function ($scope) {
-    console.log("Todo controller");
-    $scope.todoList = [{
-        name: 'first todo'
-    }, {
-        name: 'second todo'
-    }];
+
+    $scope.todoList = [];
+
+    var init = function init() {
+        var todoClass = new _todoService.TodoClass();
+        todoClass.getTodoList().then(function (todo) {
+            $scope.todoList = todo;
+        }).catch(function (err) {
+            console.log("ERR", err);
+        });
+    };
+
+    init();
 });
 
 exports.default = todoControllerModule;
 
-},{}],3:[function(require,module,exports){
+},{"../services/todoService":3}],3:[function(require,module,exports){
+/**
+ * Created by Jyothi on 25/12/16.
+ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+var baseUrl = 'api/v1';
+
+var TodoClass = exports.TodoClass = function () {
+    function TodoClass() {
+        _classCallCheck(this, TodoClass);
+    }
+
+    _createClass(TodoClass, [{
+        key: 'getTodoList',
+
+        /*async getTodoList() {
+            let response = await fetch(`/todo`);
+            let todoList = await response.json();
+            return todoList;
+        }*/
+
+        value: function getTodoList() {
+            var url = baseUrl + '/todo';
+            return fetch(url).then(function (response) {
+                return response.json();
+            }).catch(function (err) {
+                return err;
+            });
+        }
+    }]);
+
+    return TodoClass;
+}();
+
+},{}],4:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.3.2
@@ -4659,7 +4725,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.9
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -37044,8 +37110,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":4}]},{},[1]);
+},{"./angular":5}]},{},[1]);

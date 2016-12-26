@@ -5,17 +5,21 @@
 'use strict';
 
 let todoModel = require('../model/todoModel');
+let errorService = require('../services/errorService');
 
 module.exports = {
+
     getTodo (req, res, next) {
         todoModel.getTodoList()
-            .then(function (todoList) {
-                return res.json(todoList);
-            })
-            .catch(function (err) {
-                return res.status(500).send({
-                    message: err
-                });
-            });
+            .then(todoList => res.json(todoList))
+            .catch(err => next(err));
+    },
+
+    addTodo (req, res, next) {
+        let data = req.body;
+        if(!data.title || !data.description)  throw errorService.customError(400, 'MISSING_PARAMS');
+        todoModel.addTodoList(data)
+            .then(todoList => res.json(todoList))
+            .catch(err => next(err));
     }
 };

@@ -5,6 +5,7 @@
 'use strict';
 
 let todoController = require('../controller/todoController');
+let baseUrl = `/api/v1`;
 
 module.exports = (app) => {
 
@@ -12,6 +13,7 @@ module.exports = (app) => {
      * Routes
      */
 
-    app.get('/todo', todoController.getTodo);
+    app.get(`${baseUrl}/todo`, todoController.getTodo);
+    app.post(`${baseUrl}/todo`, todoController.addTodo);
 
 };
