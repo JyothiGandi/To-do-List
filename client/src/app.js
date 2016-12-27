@@ -6,10 +6,12 @@
 
 import angular from 'angular'
 import 'angular-ui-router'
+import 'angular-ui-bootstrap'
 
+import './directives/todoDirective';
 import './controllers/todoController';
 
-angular.module('todo', ["ui.router", "todoControllerModule"])
+angular.module('todo', ['ui.router', 'ui.bootstrap', 'todoControllerModule', 'todoDirectiveModule'])
 
     .config(($stateProvider, $urlRouterProvider) => {
         $urlRouterProvider.otherwise('/');
@@ -17,7 +19,7 @@ angular.module('todo', ["ui.router", "todoControllerModule"])
         $stateProvider
             .state('todo', {
                 url: '/',
-                templateUrl: 'views/todo.html',
+                templateUrl: 'templates/todo/todo.html',
                 controller: 'TodoController'
                 //controllerAs: 'todoCtrl'
             })

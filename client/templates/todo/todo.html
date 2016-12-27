@@ -1,0 +1,21 @@
+
+
+<p>TODO</p>
+
+<button class="edit-btn" ng-click="add($index)">Add</button>
+
+<ul ng-repeat="todo in todoList">
+    <li>{{todo.title}} - {{todo.description}}</li>
+</ul>
+
+<!-- Modal -->
+<script type="text/ng-template" id="myModalContent.html">
+    <form name="myForm" novalidate>
+        <my-modal>
+            <div class="form-group">
+                <input type="text" ng-model="myelement.title" placeholder="Title" required>
+                <input type="text" ng-model="myelement.description" placeholder="Description" required>
+            </div>
+        </my-modal>
+    </form>
+</script>

@@ -6,17 +6,28 @@
 
 let baseUrl = `api/v1`;
 
-export class TodoClass {
-    /*async getTodoList() {
-        let response = await fetch(`/todo`);
-        let todoList = await response.json();
-        return todoList;
-    }*/
+let todoServiceModule = angular.module('todoServiceModule', [])
+    .service('TodoService', function ($http){
 
-    getTodoList() {
-        let url = `${baseUrl}/todo`;
-        return fetch(url)
-            .then(response => response.json())
-            .catch(err => err);
-    }
-}
+        return {
+            getTodoList() {
+                return $http.get(`${baseUrl}/todo`)
+                    .then(response => response.data)
+                    .catch(function (err) {
+                        //Handle 400 and 500 status codes
+                        console.log(err.data);
+                        return err.data;
+                    });
+            },
+
+            addTodo(data) {
+                return $http.post(`${baseUrl}/todo`, data)
+                    .then(response => response.data)
+                    .catch(err => err.data);
+            }
+        };
+
+    });
+
+export default todoServiceModule;
+

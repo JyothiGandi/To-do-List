@@ -15,8 +15,7 @@ module.exports = (app) => {
             status: err.status || 500,
             message: err.message || err.stack.split(/\s*\n\s*/,2).join(' ') || errorService.getErrorMsg('INTERNAL_SERVER_ERROR')
         };
-        console.log("MY ERR ",error);
-        return res.json(error.message);
-        //return res.status(err.status).json(error.message);
+        console.log(`Error :: ${err}`);
+        return res.status(err.status).json(error.message);
     });
 };

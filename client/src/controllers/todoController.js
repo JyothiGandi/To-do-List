@@ -4,25 +4,35 @@
 
 'use strict';
 
-import { TodoClass } from '../services/todoService';
+import '../services/todoService';
+import '../services/todoModalService'
 
-let todoControllerModule = angular.module('todoControllerModule', [])
-    .controller('TodoController', function ($scope){
+let todoControllerModule = angular.module('todoControllerModule', ['todoServiceModule', 'todoModalServiceModule'])
+    .controller('TodoController', function ($scope, $state, TodoService, TodoModalService){
 
-        $scope.todoList = [];
+        if ($state.current.name === 'todo') {
+            $scope.todoList = [];
 
-        let init = function () {
-            let todoClass = new TodoClass();
-            todoClass.getTodoList()
-                .then(todo => {
-                    $scope.todoList = todo
-                })
-                .catch(err => {
-                    console.log("ERR", err);
-                });
-        };
+            let init = function () {
+                TodoService.getTodoList()
+                    .then(todoList => $scope.todoList = todoList)
+                    .catch(err => console.log(err));
+            };
 
-        init();
+            init();
+
+            $scope.add = function () {
+
+                TodoModalService.addModal($scope, 'ADD')
+
+                /*TodoService.addTodo(data)
+                    .then(resp => $scope.todoList.push(data))
+                    .catch(err => alert(err));*/
+            };
+
+
+        }
+
 
     });
 
