@@ -48,3 +48,9 @@ jspm_packages
 
 # WebStorm IDE
 .idea/
+
+# gulp destination files
+client/dist/
+
+
+
